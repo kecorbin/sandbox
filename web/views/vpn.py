@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, flash, redirect, url_for
 
 if __name__ == '__main__':
     if __package__ is None:
@@ -24,9 +24,15 @@ def add_vpn():
         vpn_data['acl_rule'] = request.form.get("acl_rule")
         vpn_data['transform_auth'] = request.form.get("transform_auth")
         vpn_data['transform_encryption'] = request.form.get("transform_encryption")
-        print vpn_data
-        print nso.add_vpn(**vpn_data).text
-        return render_template('add-vpn.html')
+        resp, payload =  nso.add_vpn(**vpn_data)
+        if resp.ok:
+            flash("Successfully Created VPN", 'success')
+            return redirect(url_for('vpn-list'))
+        else:
+            return render_template('add-vpn-failure.html',
+                                   vpn_data=payload,
+                                   response=resp)
+
     else:
         return render_template('add-vpn.html')
 
