@@ -1,0 +1,19 @@
+{% extends 'base_layout.html' %}
+{% set active_sidebar = "monitoring" %}
+
+{% block mainpanel %}
+<!-- <div class="container">
+  <div class="col-md-6">
+    <iframe src="http://localhost:3000/dashboard-solo/file/overview.json?orgId=1&panelId=8&theme=light" width="100" height="200" frameborder="0"></iframe>
+  </div>
+  <div class="col-md-6">
+  <iframe src="http://localhost:3000/dashboard-solo/file/overview.json?orgId=1&panelId=8&theme=light" width="100" height="200" frameborder="0"></iframe>
+  </div>
+</div>
+<iframe src="http://localhost:3000/dashboard-solo/file/overview.json?orgId=1&theme=light&panelId=3" width="450" height="300" frameborder="0"></iframe>
+<iframe src="http://localhost:3000/dashboard-solo/file/overview.json?orgId=1&theme=light&panelId=1" width="450" height="300" frameborder="0"></iframe>
+<iframe src="http://localhost:3000/dashboard-solo/file/overview.json?orgId=1&theme=light&panelId=4" width="450" height="300" frameborder="0"></iframe> -->
+<iframe src="http://localhost:3000/dashboard/file/overview.json?orgId=1&kiosk&theme=light"></iframe>
+{% endblock %}
+{% block footer %}
+{% endblock %}

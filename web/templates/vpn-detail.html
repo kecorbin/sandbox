@@ -1,0 +1,50 @@
+{% extends 'base_layout.html' %}
+{% set active_sidebar = "device-list" %}
+
+{% block mainpanel %}
+<h1>Tunnel Configuration</h1>
+<div style="padding-top:20px" class="container">
+
+
+<table class="table table--nostripes">
+         <tbody>
+           <tr>
+             <td><b>Partner Name</b></td>
+             <td>{{ vpn.partner_name }}</td>
+             <td><b>Peer IP Address</b></td>
+             <td>{{ vpn.peer_ip }}</td>
+
+           </tr>
+           <tr>
+             <td><b>ISAKMP Encryption</b></td>
+             <td>{{ vpn.isakmp_algo }}</td>
+             <td><b>ISAKMP Group</b></td>
+             <td>{{ vpn.isakmp_group }}</td>
+
+           </tr>
+           <tr>
+             <td><b>Device</b></td>
+             <td>{{ vpn.device.0 }}</td>
+             <td><b>Crypto Map Sequence</b></td>
+             <td>{{ vpn.sequence }}</td>
+           </tr>
+           <tr>
+             <td><b>IPSec Authentication</b></td>
+             <td>{{ vpn.transform_auth }}</td>
+             <td><b>IPSec Encryption</b></td>
+             <td>{{ vpn.transform_encryption }}</td>
+           </tr>
+         </tbody>
+       </table>
+
+
+
+
+</div>
+<h1>Tunnel Metrics</h1>
+<iframe src="http://localhost:3000/dashboard/file/tunnel-detail.json?orgId=1&var-peer_ip={{ vpn.peer_ip}}&theme=light&kiosk"></iframe>
+
+{% endblock %}
+
+<!-- disable footer for this page  -->
+{% block footer %}{% endblock %}
