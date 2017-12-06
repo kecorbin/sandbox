@@ -57,6 +57,32 @@
                     {% include 'header.html' %}
                     {% endblock %}
 
+                    <!-- flash messages if sent -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        {% for category, message in messages %}
+                          <div class="row">
+                            {% if category == 'success' %}
+                              <div class="alert alert--success">
+                                <div class="alert__icon icon-check"></div>
+                                <div class="alert__message">{{ message }} </div>
+                                <div class="alert__close icon-close"></div>
+                              </div>
+                            {% else %}
+                              <div class="alert alert--danger">
+                                <div class="alert__icon icon-error"></div>
+                                <div class="alert__message">{{ message }}</div>
+                                <div class="alert__close icon-close"></div>
+                              </div>
+                            {% endif %}
+                          </div>
+
+                        {% endfor %}
+
+                      {% endif %}
+                    {% endwith %}
+
+
                     {% block mainpanel %}
                     {% endblock %}
 

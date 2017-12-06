@@ -1,9 +1,16 @@
 {% extends 'base_layout.html' %}
 {% set active_sidebar = "device-list" %}
-
+{% block extra_js %}
+<script src="/static/js/vpn-detail.js"></script>
+{% endblock %}
 {% block mainpanel %}
+<h1>Tunnel Operations</h1>
+<button
+  onclick="check_sync('/nso{{ vpn.operations['check-sync'] }}')"
+  class="btn">Verify Configuration
+</button>
 <h1>Tunnel Configuration</h1>
-<div style="padding-top:20px" class="container">
+<div class="container">
 
 
 <table class="table table--nostripes">
