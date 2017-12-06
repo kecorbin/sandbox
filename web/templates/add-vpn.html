@@ -1,8 +1,10 @@
 {% extends 'base_layout.html' %} {% set active_sidebar = "device-list" %} {% block extra_js %}
 <script src="/static/js/jquery.steps.min.js"></script>
 {% endblock %} {% block extra_css %}
-<link rel="stylesheet" href="/static/css/jquery.steps.css"> {% endblock %} {% block mainpanel %}
-<div class="container">
+<link rel="stylesheet" href="/static/css/jquery.steps.css"> {% endblock %}
+
+{% block mainpanel %}
+<div class="container" id="setup-wizard-container">
 
 
   <form action="#" method="POST" id="setup-wizard">
@@ -143,20 +145,39 @@
 
 </div>
 
+<!--this div used for indicating a waiting response-->
+<div style="display: none;" id="loading" class="outer">
+    <div class="middle">
+        <div class="inner">
+            <br><br><br><br>
+
+            <div id="loading-dots" class="loading-dots loading-dots--success">
+              <p><h1>Please wait while we configure your vpn for you...</h1></p>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script>
   $("#setup-wizard").steps({
     headerTag: "h3",
     bodyTag: "section",
     transitionEffect: "slideLeft",
     stepsOrientation: "vertical",
-    onFinished: function (event, currentIndex)
-    {
-    var form = $(this);
-    // Submit form input
-    form.submit();
-    $('#myPleaseWait').modal('show');
-  }
+    onFinished: function (event, currentIndex) {
+      var form = $(this);
+      // Submit form input
+      form.submit();
+      $('#setup-wizard-container').hide();
+      $('#loading').show();
+    }
   });
+
 </script>
 
 {% endblock %}
