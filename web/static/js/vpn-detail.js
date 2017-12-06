@@ -38,14 +38,16 @@ function redeploy(url) {
 }
 
 function undeploy(url) {
+  if (confirm("Undeploying will remove the VPN from running configuration, the service definition is maintained and can be re-deployed at anytime.  Would you like to proceed?") == true) {
+    $.ajax({
+       url: url,
+       method: 'POST',
+       success: function (msg) {
+            alert('VPN Successfully Undeployed')
+        }
 
-  $.ajax({
-     url: url,
-     method: 'POST',
-     success: function (msg) {
-          alert('VPN Successfully Undeployed')
-      }
+   })
+  }
 
- })
 
 }
