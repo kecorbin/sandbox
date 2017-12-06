@@ -19,6 +19,17 @@ HEADERS = {
     'accept': "application/vnd.yang.collection+json"
     }
 
+def send_post(url):
+    """
+    used to pass through NSO requests
+    """
+    HEADERS['accept'] = 'application/vnd.yang.data+json'
+    if not url.startswith('/'):
+        url = "/{}".format(url)
+    url = BASE_URL + url
+    resp = requests.post(url, headers=HEADERS)
+    return resp
+
 def get_configured_vpns():
     HEADERS['accept'] = 'application/vnd.yang.collection+json'
     resp = requests.get(API_ROOT + "/vpn", headers=HEADERS)
@@ -32,10 +43,8 @@ def add_vpn(**kwargs):
 
     xml_headers['Content-Type'] = "application/vnd.yang.data+xml"
     xml_headers['Accept'] = "application/vnd.yang.data+xml"
-    print payload
-    print xml_headers
     resp = requests.post(API_ROOT, data=payload, headers=xml_headers)
-    return resp
+    return (resp, payload)
 
 
 def get_vpn_details(partner_name):
