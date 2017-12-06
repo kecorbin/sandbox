@@ -16,4 +16,10 @@ class NSOPassthrough(Resource):
     """
     def post(self, nso_url):
         resp = send_post(nso_url)
-        return resp.json()
+        print resp.status_code
+        try:
+            data = resp.json()
+            return data
+        except ValueError:
+            if resp.ok:
+                return "OK", 200

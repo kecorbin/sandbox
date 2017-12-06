@@ -5,10 +5,24 @@
 {% endblock %}
 {% block mainpanel %}
 <h1>Tunnel Operations</h1>
-<button
-  onclick="check_sync('/nso{{ vpn.operations['check-sync'] }}')"
-  class="btn">Verify Configuration
-</button>
+<div class="container">
+  <div class="row">
+    <button id=check-sync class="btn"
+      onclick="check_sync('/nso{{ vpn.operations['check-sync'] }}')"
+      class="btn">Check Sync
+    </button>
+    <button id=redeploy-button class="btn"
+      onclick="redeploy('/nso{{ vpn.operations['reactive-re-deploy'] }}')"
+      class="btn">Reactive Re-Deploy
+    </button>
+    <button id=undeploy-button class="btn btn--danger"
+      onclick="undeploy('/nso{{ vpn.operations['un-deploy'] }}')"
+      class="btn">Undeploy
+    </button>
+
+  </div>
+</div>
+<p>
 <h1>Tunnel Configuration</h1>
 <div class="container">
 
